@@ -1,0 +1,97 @@
+<script type="text/javascript">
+
+	function istimeEvent() {
+
+		var checkbox = document.getElementById('timeCheck');
+		var divCon = document.getElementById("TimeContainer");
+		if(checkbox.checked == true){
+			divCon.style.display = "block";
+		} else{
+			divCon.style.display = "none";
+		}
+	}
+	
+	function timeEvent(task){
+		x = moment().format('LT');
+		if(task.fromT>=x && x<=task.toT){
+			alert("A task is pending: "+task.taskName);
+		}
+	}
+	function taskRunning(tasks){
+		alert("task running is Active")
+		if(tasks.length == 0){
+			break
+		} else{
+			tasks.forEach(function(i){
+				if(i.fromT == ""){
+					alert("A task is pending: "+i.taskName);
+				}
+				else{
+					timeEvent(i);
+				}
+			});
+		}
+	}
+
+	function fireFunction(tasks){
+		setInterval(taskRunning(tasks), 3000)
+	}
+
+</script>
+
+
+<h1>ToDo list: </h1>
+
+<div class="container">
+	<form action="/createTask" method="POST">
+		<input type="text" name="newTask" placeholder="Task Name">
+
+		<input type="checkbox" id="timeCheck" onclick="istimeEvent()" >
+
+		<label>Time Event</label> 
+
+		<div id ="TimeContainer" style="display: none;">
+			<label>From:</label>
+			<input type="time" name="fromTime">
+			<label>To:</label>
+			<input type="time"  name="toTime">
+		</div>		
+
+		<button onclick="fireFunction(tasks)" type="submit">Create Task</button>
+	
+
+	<h2> Active Tasks: </h2>
+	<oL>
+	<% for( var i = 0; i < tasks.length; i++){ %>
+	    <li>
+	    	<input type="checkbox" name="check" value="<%= tasks[i].taskName %>">	
+	    	<%= tasks[i].taskName %>
+	    	<% if(tasks[i].fromT == ""){ %>
+	    		<label> ,All Day Event </label>
+	    	<% } else{ %>
+	    		<label> ,<%= tasks[i].fromT %> - <%= tasks[i].toT%> </label>
+	    	<% } %>
+
+	    </li>
+	<% } %>
+	</oL>
+
+	<button formaction="/dismissTask" type="submit" id="top"> Remove Task </button>
+
+	</form>
+
+	<h2> Completed Tasks: </h2>
+
+	<ol>
+		<% for(var i=0; i< ctasks.length; i++){ %>
+			<li>
+				<label> <%= ctasks[i] %> </label>
+			</li>
+		<% } %>
+	</ol>
+
+</div>
+
+
+
+
