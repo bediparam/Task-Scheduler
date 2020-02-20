@@ -25,8 +25,22 @@ app.post('/createTask', function(req, res){
 				 "toT":toTime
 				});
 
-	res.redirect('/');
+	res.redirect('/tasksrunning');
 });
+
+app.get('/tasksrunning', function(req, res){
+	tasks.forEach(function(i){
+		if(i.fromT == ""){
+			console.log("A task is pending: "+i.taskName)
+		} else{
+			x = moment().format('LT');
+			console.log("A task is pending: "+i.taskName);
+			console.log("Event Time: "+i.fromT);
+			console.log("Its been: "+ x);
+		}
+	})
+	res.redirect('/')
+})
 
 app.post('/dismissTask', function(req, res){
 	
