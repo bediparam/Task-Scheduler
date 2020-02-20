@@ -11,31 +11,27 @@
 		}
 	}
 	
-	function timeEvent(task){
-		x = moment().format('LT');
-		if(task.fromT>=x && x<=task.toT){
-			alert("A task is pending: "+task.taskName);
-		}
-	}
-	function taskRunning(tasks){
-		alert("task running is Active")
-		if(tasks.length == 0){
-			break
-		} else{
-			tasks.forEach(function(i){
-				if(i.fromT == ""){
-					alert("A task is pending: "+i.taskName);
-				}
-				else{
-					timeEvent(i);
-				}
-			});
-		}
-	}
+	// function timeEvent(task){
+	// 	x = moment().format('LT');
+	// 	if(task.fromT>=x && x<=task.toT){
+	// 		alert("A task is pending: "+task.taskName);
+	// 	}
+	// }
+	// function taskRunning(tasks){
+	// 	tasks.forEach(function(i){
+	// 		if(i.fromT == ""){
+	// 			alert("A task is pending: "+i.taskName);
+	// 		}
+	// 		else{
+	// 			timeEvent(i);
+	// 		}
+	// 	});
+		
+	// }
 
-	function fireFunction(tasks){
-		setInterval(taskRunning(tasks), 3000)
-	}
+	// function fireFunction(tasks){
+	// 	setInterval(taskRunning(tasks), 3000)
+	// }
 
 </script>
 
@@ -57,7 +53,7 @@
 			<input type="time"  name="toTime">
 		</div>		
 
-		<button onclick="fireFunction(tasks)" type="submit">Create Task</button>
+		<button type="submit">Create Task</button>
 	
 
 	<h2> Active Tasks: </h2>
